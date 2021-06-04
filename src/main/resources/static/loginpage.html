@@ -118,7 +118,6 @@
         
         <!-- Modal Log In -->
         <div class="modal fade" id="login" tabindex="-1" aria-labelledby="loginModal" aria-hidden="true">
-            <form action="/login" method="post">
                 <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content opacity" style="border-radius: 20px;">
                     <div class="modal-header">
@@ -126,6 +125,7 @@
                         <h5 class="modal-title" id="loginModal">Accedi a MoneyStats</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
+                    <form action="/login" method="post">
                     <div class="modal-body">
                         <div class='form-floating mb-3'> 
                             <input type='text' id="username1" name='username' class='form-control roundedCorner mx-auto' placeholder="Inserire Username..." required>
@@ -142,6 +142,7 @@
                     </div>
                 </div>
             </div>
+            </form>
         </div>
         <!-- Modal Sign In -->
         <div class="modal fade" id="signupM" tabindex="-1" aria-labelledby="registratiModal" aria-hidden="true">
@@ -155,30 +156,30 @@
                     <div class="modal-body">
                         <div class="row">
                         <div class='form-floating mb-3 col'> 
-                            <input type='text' id="nome1" name='nome' class='form-control roundedCorner mx-auto' placeholder="Inserire Nome..." required>
+                            <input type='text' id="nome1" name='nome' style="padding-left: 20px;" class='form-control roundedCorner mx-auto' placeholder="Inserire Nome..." required>
                             <label for='nome1' style="padding-left: 40px;">Inserire Nome</label>
                         </div> 
                         <div class='form-floating mb-3 col'> 
-                            <input type='text' id="cognome1" name='cognome' class='form-control roundedCorner mx-auto' placeholder="Inserire Cognome..." required>
+                            <input type='text' id="cognome1" name='cognome' style="padding-left: 20px;" class='form-control roundedCorner mx-auto' placeholder="Inserire Cognome..." required>
                             <label for='cognome1' style="padding-left: 40px;">Inserire Cognome</label>
                         </div>
                     </div>
                     <div class="row">
                         <div class='form-floating mb-3 col'> 
-                            <input type='mail' id="mail1" name='mail' class='form-control roundedCorner mx-auto' style="max-width: 400px;" placeholder="Inserire Email..." required>
+                            <input type='mail' id="mail1" name='mail' style="padding-left: 20px;" class='form-control roundedCorner mx-auto' style="max-width: 400px;" placeholder="Inserire Email..." required>
                             <label for='mail1' style="padding-left: 40px;">Inserire Email</label>
                         </div> 
                         <div class='form-floating mb-3 col'> 
-                            <input type='date' id="ddn1" name='ddn' class='form-control roundedCorner mx-auto' style="max-width: 400px; padding-left: 30px;" placeholder="Inserire Data di Nascita..." required>
+                            <input type='date' id="ddn1" name='ddn' style="padding-left: 20px;" class='form-control roundedCorner mx-auto' style="max-width: 400px; padding-left: 30px;" placeholder="Inserire Data di Nascita..." required>
                             <label for='ddn1' style="padding-left: 40px;">Inserire Data di Nascita</label>
                         </div>
                     </div>
                         <div class='form-floating mb-3'> 
-                            <input type='text' id="username2" name='username' class='form-control roundedCorner mx-auto' placeholder="Inserire Username..." required>
+                            <input type='text' id="username2" style="padding-left: 20px;" name='username' class='form-control roundedCorner mx-auto' placeholder="Inserire Username..." required>
                             <label for='username2' style="padding-left: 30px;">Inserire Username</label>
                         </div> 
                         <div class='form-floating mb-3'> 
-                            <input type='password' id="password2" name='password' class='form-control roundedCorner mx-auto' placeholder="Inserire Password..." required>
+                            <input type='password' id="password2" style="padding-left: 20px;" name='password' class='form-control roundedCorner mx-auto' placeholder="Inserire Password..." required>
                             <label for='password2' class='form-label' style="padding-left: 30px;">Inserire Password</label>
                         </div>
                     </div>

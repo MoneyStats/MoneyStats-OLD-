@@ -47,6 +47,26 @@ $(document).ready(function () {
       $('#password').val('');
   })
 
+  // MOBILE
+  $('#signupBtn').click(function (){
+    const user = {
+        nome: $('#nome1').val(),
+        cognome: $('#cognome1').val(),
+        datadinascita: $('#ddn1').val(),
+        email: $('#mail1').val(),
+        username: $('#username2').val(),
+        password: $('#password2').val()
+    }
+    addUser(user);
+
+    $('#nome1').val('');
+    $('#cognome1').val('');
+    $('#ddn1').val('');
+    $('#mail1').val('');
+    $('#username2').val('');
+    $('#password2').val('');
+})
+
   /*
   $('#form').submit(function(){
       var username = $('#usernamelogin').val();
