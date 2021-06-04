@@ -5,6 +5,9 @@
     background-size: cover; 
     background-position: top;
 }
+.roundedCorner{
+	border-radius: 100px !important;
+}
 
 /* EFFETTO ROTAZIONE IMG ON MOUSE */
 .hover-rotate {
