@@ -22,4 +22,31 @@ $(document).ready(function () {
         })
     }
     getWallet();
+
+        $('#aggiungiWallet').click(function () {
+            const wallet = {
+                name: $('#name').val(),
+                category: {
+                    id: $('#catOptionhtml').val(),
+                }
+            }
+            addWallet(wallet);
+
+        $('#value').val('');
+        $('#date').val('');
+        $('#listWallet').val('');
+    })
+
+    function addWallet(wallet) {
+        console.log("Dentro funzione")
+        $.ajax({
+            type: "POST",
+            url: `/wallet/postWallet/${wallet.category.id}`,
+            data: JSON.stringify(wallet),
+            contentType: 'application/json',
+            success: function (response) {
+                console.log("Sono aggiunto")
+            }
+        });
+    }
 });

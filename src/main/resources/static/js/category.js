@@ -3,6 +3,7 @@ $(document).ready(function () {
         $.get('/category/list', function (resume) {
             console.log(resume);
             const listCategory = $('#listCategory');
+            const optionCategory = $('#catOptionhtml');
             for (let i = resume.length - 1; i >= 0; i--) {
                 $(`<tr id='riga-${resume[i].id}'>
                 <td>${resume[i].name}</td>
@@ -17,6 +18,7 @@ $(document).ready(function () {
                     </div>
                 </td>
             </tr>`).hide().appendTo(listCategory).fadeIn(i * 20);
+            $(`<option id='walletSelect' class="roundedCorner" value="${resume[i].id}">${resume[i].name}</option>`).hide().appendTo(optionCategory).fadeIn(i * 20);
             }
         })
     }

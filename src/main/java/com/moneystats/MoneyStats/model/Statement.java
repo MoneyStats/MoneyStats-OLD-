@@ -13,7 +13,6 @@ public class Statement {
     private int id;
     private String date;
     private double value;
-    private double percentage;
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
@@ -21,11 +20,10 @@ public class Statement {
     @JoinColumn(name = "wallet_id", nullable = false)
     private Wallet wallet;
 
-    public Statement(int id, String date, double value, double percentage, User user, Wallet wallet) {
+    public Statement(int id, String date, double value, User user, Wallet wallet) {
         this.id = id;
         this.date = date;
         this.value = value;
-        this.percentage = percentage;
         this.user = user;
         this.wallet = wallet;
     }
@@ -56,14 +54,6 @@ public class Statement {
 
     public void setValue(double value) {
         this.value = value;
-    }
-
-    public double getPercentage() {
-        return percentage;
-    }
-
-    public void setPercentage(double percentage) {
-        this.percentage = percentage;
     }
 
     public User getUser() {

@@ -30,8 +30,9 @@ public class ApplicationSecurityConfig<AuthService> extends WebSecurityConfigure
 
                 .authorizeRequests().antMatchers("/", "/css/**", "/img/**", "/logos/**",
                 "/loginpage.html", "/jquery-3.6.0.min.js", "/js/**", "/signup/add", "/login").permitAll()
-                //acesso ai template Admin
-                .antMatchers("/homepage.html").hasAnyRole(Roles.ADMIN, Roles.USER)
+                //acesso ai template
+                .antMatchers("/homepage.html", "/statement.html").hasAnyRole(Roles.ADMIN, Roles.USER)
+                .antMatchers("/post").hasAnyRole(Roles.ADMIN, Roles.USER)
                 .anyRequest().authenticated()
                 .and()
                 .exceptionHandling()
