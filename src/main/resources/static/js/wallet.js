@@ -1,4 +1,5 @@
 $(document).ready(function () {
+    // MODALE WALLET NELLA HOMEPAGE
     function getWallet(){
         $.get('/wallet/list', function (resume) {
             console.log(resume);
@@ -23,6 +24,7 @@ $(document).ready(function () {
     }
     getWallet();
 
+    // MODALE AGGIUNGI WALLET HOMEPAGE
         $('#aggiungiWallet').click(function () {
             const wallet = {
                 name: $('#name').val(),

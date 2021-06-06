@@ -14,4 +14,7 @@ public interface IStatementCRUD extends JpaRepository<Statement, Integer> {
 
     @Query(value = "select distinct statements.date from Statement statements where statements.user.id = :userId")
     List<String> selectdistinctstatement(int userId);
+
+    @Query(value = "select '*' from Statement statements where statements.date = :date and statements.user.id = :userId")
+    List<Statement> findStatementByDate(@Param("date") String date, int userId);
 }

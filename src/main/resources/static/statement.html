@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./css/statement.css">
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="./js/jquery-3.6.0.min.js"></script>
     <script src="./js/statement.js"></script>
     <!-- SEZIONE COLORI SEARCH BAR --> 
@@ -68,37 +69,27 @@
                 
             </div>   
         </div>   
-    </nav>
-        <div style="padding-top: 120px;">
-            <div class='card col-sm-4 mx-auto' style="padding: 30px;">
-                <div class='card-body'>
-                    <div class="text-center">
-                        <figure class="hover-rotate mx-auto">
-                        <img src="./logos/logo_transparent.png" class="roundB" alt="block" style="width: 250px;">
-                        <br><br>
-                    <p class='fs-2 fw-bold text-dark text-center'>Statement</p> 
-                        </figure>
-                    </div> 
-                            <div class='mb-3'>  
+    </nav> 
+    <div class="row row-cols-1 row-cols-md-3 g-4" style="padding-top: 100px; margin-left: 20px; margin-right: 20px;" id="listWallet"></div>
+    <div class="row row-cols-1 row-cols-md-3 g-4" style="padding-top: 50px; margin-left: 20px; margin-right: 20px;">
+            <div class="col">
+                <div class="card h-100">
+                    <img style="background-size: cover; " src="https://www.bergamonews.it/photogallery_new/images/2021/03/l-importanza-dell-inglese-commerciale-nel-mondo-finanziario-692738.large.jpg" class="card-img h-100" alt="...">
+                    <div class="card-img-overlay">
+                        <div class="card h-100" style="background-color: rgba(255, 255, 255, 0.7);">
+                            <div class="card-body">
+                                <h5 class="card-title">Statement Finanziario</h5>
+                                <p class="card-text">Inserire la data dello statement</p>
                                 <div class='form-floating mb-3'> 
-                                    <input type='date' id="date" name='data' class='form-control roundedCorner mx-auto' placeholder="Inserire Data..." required>
+                                    <input style="background-color: rgba(255, 255, 255, 0.7);" type='date' id="date" name='data' class='form-control roundedCorner mx-auto' placeholder="Inserire Data..." required>
                                     <label for='data'>Inserire Data</label>
                                 </div>
-                            </div> 
-                            <div class='mb-3'> 
-                                <div class='form-floating mb-3'> 
-                                    <input type='number' id="value" name='value' class='form-control roundedCorner mx-auto' placeholder="Inserire Valore in £GBP..." required>
-                                    <label for='value'>Inserire Valore in £GBP</label>
-                                </div>
-                             </div>
-                             <div class="mb-3">
-                                <select class="form-select" id="listWallet" aria-label="Default select example">
-                                  </select>
-                             </div>
-                            <button type="button" class="btn btn-outline-success float-end" id="aggiungiStatement">Conferma</button>  
-
-                        </div> 
-                    </div> 
-                </div> 
+                                <button type="button" class="btn btn-outline-success float-end" id="aggiungiStatement">Conferma</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 </body>
 </html>

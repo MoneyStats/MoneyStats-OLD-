@@ -9,7 +9,8 @@
     <script src="./js/jquery-3.6.0.min.js"></script>
     <script src="./js/wallet.js"></script>
     <script src="./js/category.js"></script>
-    <script src="./js/statement.js"></script>
+    <script src="./js/homepageplus.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!-- Font Awesome -->
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css" />
   <!-- Google Fonts Roboto -->
@@ -72,6 +73,7 @@
                               Opzioni   
                         </a>   
                         <ul class='dropdown-menu dropdown-menu-lg-end' aria-labelledby='navbarDropdown'> 
+                          <li><a class='dropdown-item' aria-current='page' href='statement(disabled).html'>Aggiungi Statement(Disabled)</a></li>
                             <li><a class='dropdown-item disabled' href='#'>Gestione Account</a></li>    
                              <li><a class='dropdown-item' href='changelog.html'>Changelog</a></li>   
                              <li><a class='dropdown-item' href='/logout'>Logout</a></li>  
@@ -315,7 +317,6 @@
                   <h5 class="modal-title" id="walletModal">MoneyStats Wallet</h5>
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
-              <form action="/login" method="post">
               <div class="modal-body">
                 <table class="table table-striped table-hover">
                   <thead>
@@ -343,7 +344,6 @@
             <h5 class="modal-title" id="categoryModal">MoneyStats Categorie</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <form action="/login" method="post">
         <div class="modal-body">
           <table class="table table-striped table-hover">
             <thead>
@@ -370,7 +370,6 @@
                   <h5 class="modal-title" id="walletModalAdd">MoneyStats Aggiungi Portafoglio</h5>
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
-              <form action="/login" method="post">
               <div class="modal-body">
                 <div class='mb-3'>  
                   <div class='form-floating mb-3'> 
@@ -399,7 +398,6 @@
                         <h5 class="modal-title" id="dataWalletModal">MoneyStats Data</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <form action="/login" method="post">
                     <div class="modal-body">
                     <div class="mb-3">
                         <select class="form-select roundedCorner" id="dateOption" aria-label="Default select example">
