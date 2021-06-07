@@ -12,7 +12,7 @@ $(document).ready(function () {
     getDate();
 
     $('#dataConfirm').click(function () {
-        document.cookie = $('#dateOption').val();
+        document.cookie = $('#dateOption').val() + "; path=/";
         const Toast = Swal.mixin({
             toast: true,
             position: 'top-end',

@@ -3,7 +3,6 @@ $(document).ready(function () {
     function getWallet(){
         $.get('/wallet/list', function (resume) {
             $('#title').text('Capitale ' + document.cookie);
-            var dateCookie = document.cookie;
          //   document.cookie.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/");
             console.log(document.cookie);
             const listWallet = $('#capitalewallet');
@@ -32,16 +31,51 @@ $(document).ready(function () {
             //  document.cookie = "id"+i+" = " + resume[i].id;
             }
         })
+        
     }
     getWallet();
 
-    function getStatement(){
-        $.get(`/statement/statementbydate/${document.cookie}`, function (statement) {
-            for (let i = 0; i < statement.length; i++) {
-                $(`#tot${statement[i].wallet.id}`).text('£ ' + statement[i].value);
-            }
-        })
-    }
+    var tot = 0;
+    var totold = 0;
+    var dataold;
     getStatement();
+    function getStatement(){
+      $.get(`/statement/statementbydate/${document.cookie}`, function (statement) {
+        for (let i = 0; i < statement.length; i++) {
+          var value = statement[i].value;
+          tot += value;
+          $(`#tot${statement[i].wallet.id}`).text('£ ' + statement[i].value);
+        }
+        $('#totale').text("£ " + tot);
+        getDate();
+      })
+    }
+    
+    function getDate() {
+      $.get('/statement/datestatement', function (date) {
+        for (let i = 0; i < date.length; i++) {
+          if (date[i] === document.cookie){
+                dataold = date[i - 1];
+                break;
+              }
+              break;
+        }
+      })
+    }
+    getOld();
+        
+      function getOld() {
+        $.get(`/statement/statementbydate/${document.cookie}`, function (performance) {
+        console.log(dataold + "Da")
+        var percentuale = 0;
+          for (let i = 0; i < performance.length; i++) {
+            var value1 = performance[i].value;
+            totold += value1;
+          }
+          console.log(totold)
+      })
+
+    }    
+
 
 });

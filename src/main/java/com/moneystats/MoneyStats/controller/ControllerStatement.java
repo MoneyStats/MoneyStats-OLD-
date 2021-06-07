@@ -54,7 +54,7 @@ public class ControllerStatement {
         String username = principal.getName();
         User utente = (User) utenteGEST.findByUsername(username).orElse(null);
 
-        List<Statement> statementList = statementGEST.findStatementByDate(date, utente.getId());
+        List<Statement> statementList = statementGEST.findAllByUserIdAndDate(utente.getId(), date);
         return statementList;
     }
 }
