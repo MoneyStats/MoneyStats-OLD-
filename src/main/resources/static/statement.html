@@ -9,6 +9,10 @@
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="./js/jquery-3.6.0.min.js"></script>
     <script src="./js/statement.js"></script>
+    <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css" />
+  <!-- Google Fonts Roboto -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" />
     <!-- SEZIONE COLORI SEARCH BAR --> 
 	<!-- Chrome, Firefox OS and Opera --> 
 	<meta name='theme-color' content='#080957'> 
@@ -70,26 +74,33 @@
             </div>   
         </div>   
     </nav> 
-    <div class="row row-cols-1 row-cols-md-3 g-4" style="padding-top: 100px; margin-left: 20px; margin-right: 20px;" id="listWallet"></div>
-    <div class="row row-cols-1 row-cols-md-3 g-4" style="padding-top: 50px; margin-left: 20px; margin-right: 20px;">
-            <div class="col">
-                <div class="card h-100">
-                    <img style="background-size: cover; " src="https://www.bergamonews.it/photogallery_new/images/2021/03/l-importanza-dell-inglese-commerciale-nel-mondo-finanziario-692738.large.jpg" class="card-img h-100" alt="...">
-                    <div class="card-img-overlay">
-                        <div class="card h-100" style="background-color: rgba(255, 255, 255, 0.7);">
-                            <div class="card-body">
-                                <h5 class="card-title">Statement Finanziario</h5>
-                                <p class="card-text">Inserire la data dello statement</p>
-                                <div class='form-floating mb-3'> 
-                                    <input style="background-color: rgba(255, 255, 255, 0.7);" type='date' id="date" name='data' class='form-control roundedCorner mx-auto' placeholder="Inserire Data..." required>
-                                    <label for='data'>Inserire Data</label>
-                                </div>
-                                <button type="button" class="btn btn-outline-success float-end" id="aggiungiStatement">Conferma</button>
-                            </div>
-                        </div>
+    <div class="row row-cols-1 row-cols-md-3 g-4" style="padding-top: 100px; margin-left: 20px; margin-right: 20px;" id="listWallet">
+        <div class="col-xl-3 col-sm-6" style="margin-bottom: 30px;">
+            <div class="card card-stats mb-4 mb-xl-0">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col">
+                    <h5 class="card-title text-uppercase text-muted mb-0">Statement Finanziario</h5>
+                    <div class='form-floating mb-3'> 
+                        <input style="background-color: rgba(255, 255, 255, 0.7);" type='date' id="date" name='data' class='form-control roundedCorner mx-auto' placeholder="Inserire Data..." required>
+                        <label for='data'>Inserire Data</label>
                     </div>
+                  </div>
+                  <div class="col-auto">
+                    <div class="icon icon-shape bg-danger text-white rounded-circle shadow">
+                      <i class="fas fa-chart-bar"></i>
+                    </div>
+                  </div>
                 </div>
+                <p class="mt-3 mb-0 text-muted text-sm">
+                    <p class="mt-3 mb-0 text-muted text-sm">
+                        <span class="text-nowrap sincetot">Inserisci prima i valori</span>
+                        <button type="button" class="btn btn-outline-success float-end" id="aggiungiStatement">Conferma</button>
+                    </p>
+                </p>
+              </div>
             </div>
+          </div>
         </div>
 </body>
 </html>
