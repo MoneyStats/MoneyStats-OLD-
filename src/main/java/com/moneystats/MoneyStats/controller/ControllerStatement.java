@@ -54,7 +54,15 @@ public class ControllerStatement {
         String username = principal.getName();
         User utente = (User) utenteGEST.findByUsername(username).orElse(null);
 
-        List<Statement> statementList = statementGEST.findAllByUserIdAndDate(utente.getId(), date);
+        List<Statement> statementList = statementGEST.findAllByUserIdAndDateOrderByWalletId(utente.getId(), date);
         return statementList;
+    }
+
+    @GetMapping("/listStatement")
+    public List<String> listByWalletAndValue(Principal principal){
+        String username = principal.getName();
+        User utente = (User) utenteGEST.findByUsername(username).orElse(null);
+        List<String> statementsByWallet = statementGEST.findStatementByDateOrdered(utente.getId());
+        return statementsByWallet;
     }
 }

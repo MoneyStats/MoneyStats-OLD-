@@ -10,6 +10,7 @@ $(document).ready(function () {
                   <div class="row">
                       <div class="col">
                       <h5 class="card-title text-uppercase text-muted mb-0">${resume[i].name} (${resume[i].category.name})</h5>
+                      <hr>
                       <div class='form-floating mb-3'> 
                       <input style="background-color: rgba(255, 255, 255, 0.7);" type='number' id="value${resume[i].id}" class='form-control roundedCorner mx-auto' placeholder="Inserire Valore in £GBP..." required>
                       <label for='value'>Inserire Valore in £GBP</label>

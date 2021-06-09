@@ -1,4 +1,5 @@
 $(document).ready(function () {
+    getDate();
     // MODALE SELEZIONE DATA SEZIONE HOMEPAGE
     function getDate() {
         var lastDate = "";
@@ -115,7 +116,7 @@ $(document).ready(function () {
             })
         })
     }
-    getDate();
+    
 
     $('#dataConfirm').click(function () {
         document.cookie = $('#dateOption').val() + "; path=/";
@@ -239,6 +240,7 @@ $(document).ready(function () {
         });
         }
 
+
         // LISTA STATEMENT
         function getWallet(){
           $.get('/wallet/list', function (resume) {
@@ -252,19 +254,22 @@ $(document).ready(function () {
       getWallet();
 
       $.get('/statement/datestatement', function (data) {
+        year = data[data.length-1].split("-")[0];
+        console.log(year)
         const dataTabella = $('#data');
         for (let i = 0; i < data.length; i++) {
-          // DATA PER TABELLA
-        $(`<th scope="row" id="data">${data[i]}</th>`).hide().appendTo(dataTabella).fadeIn(i * 20);
-        // Fine calcolo
-          $.get(`/statement/statementbydate/${data[i]}`, function (statementTab) {
-            const statTab = $('#data')
-            for (let i = 0; i < statementTab.length; i++){
-              $(`<th>${statementTab[i].value}</th>`).hide().appendTo(statTab).fadeIn(i * 20);
-            }
-            
-          })
+          if (data[i].includes(year)){
+            $.get(`/statement/statementbydate/${data[i]}`, function (statementTab) {
+              // DATA PER TABELLA
+              $(`<tr id="data${i}"><th scope="row">${data[i]}</th></tr>`).hide().appendTo(dataTabella).fadeIn(i * 20);
+              const statTab = $(`#data${i}`)
+            // Fine calcolo
+              for (let y = 0; y < statementTab.length; y++){
+                $(`<td>£ ${statementTab[y].value}</td>`).hide().appendTo(statTab).fadeIn(i * 20);
+              }
+            })
           }
+        }
           
       })
     
