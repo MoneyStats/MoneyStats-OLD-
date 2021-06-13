@@ -1,4 +1,5 @@
 $(document).ready(function () {
+    // MODALE CATEGORIE HOMEPAGE
     function getCategory(){
         $.get('/category/list', function (resume) {
             console.log(resume);

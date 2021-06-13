@@ -25,6 +25,7 @@ public class ControllerStatement {
     @Autowired
     IWalletCRUD walletGEST;
 
+
     @PostMapping("/post")
     public void addStatement(Principal principal, @RequestBody Statement statement){
         String username = principal.getName();
@@ -38,7 +39,7 @@ public class ControllerStatement {
     }
 
     @GetMapping("/datestatement")
-     public List<String> listByDate(Principal principal){
+     public List<String> listDate(Principal principal){
         String username = principal.getName();
         User utente = (User) utenteGEST.findByUsername(username).orElse(null);
         for (int i = 0; i < statementGEST.selectdistinctstatement(utente.getId()).size(); i++){
@@ -46,5 +47,22 @@ public class ControllerStatement {
             return statementGEST.selectdistinctstatement(utente.getId());
         }
         return null;
+    }
+
+    @GetMapping("/statementbydate/{date}")
+    public List<Statement> listByDate(Principal principal, @PathVariable String date){
+        String username = principal.getName();
+        User utente = (User) utenteGEST.findByUsername(username).orElse(null);
+
+        List<Statement> statementList = statementGEST.findAllByUserIdAndDateOrderByWalletId(utente.getId(), date);
+        return statementList;
+    }
+
+    @GetMapping("/listStatement")
+    public List<String> listByWalletAndValue(Principal principal){
+        String username = principal.getName();
+        User utente = (User) utenteGEST.findByUsername(username).orElse(null);
+        List<String> statementsByWallet = statementGEST.findStatementByDateOrdered(utente.getId());
+        return statementsByWallet;
     }
 }

@@ -10,10 +10,10 @@
 	</parent>
 	<groupId>com.moneystats</groupId>
 	<artifactId>MoneyStats</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.5.0-ALPHA</version>
 	<packaging>war</packaging>
 	<name>MoneyStats</name>
-	<description>Demo project for Spring Boot</description>
+	<description>Money Tracker</description>
 	<properties>
 		<java.version>1.8</java.version>
 	</properties>
@@ -67,5 +67,6 @@
 			</plugin>
 		</plugins>
 	</build>
+
 
 </project>
