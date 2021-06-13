@@ -124,7 +124,7 @@ $(document).ready(function () {
             toast: true,
             position: 'top-end',
             showConfirmButton: false,
-            timer: 1500,
+            timer: 1000,
             timerProgressBar: true,
           })
           
@@ -134,7 +134,7 @@ $(document).ready(function () {
           })
           setTimeout(function () {
             window.location.href = "capitalewallet.html";
-          }, 1500);
+          }, 1000);
     })
 
 
@@ -272,6 +272,8 @@ $(document).ready(function () {
         }
           
       })
-    
-  
+      
+      $('.resetCookies').on('click', function resetCookies(){
+        document.cookie.split(";").forEach(function(c) { document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/"); });
+      })
 });

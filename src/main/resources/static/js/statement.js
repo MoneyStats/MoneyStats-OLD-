@@ -12,8 +12,8 @@ $(document).ready(function () {
                       <h5 class="card-title text-uppercase text-muted mb-0">${resume[i].name} (${resume[i].category.name})</h5>
                       <hr>
                       <div class='form-floating mb-3'> 
-                      <input style="background-color: rgba(255, 255, 255, 0.7);" type='number' id="value${resume[i].id}" class='form-control roundedCorner mx-auto' placeholder="Inserire Valore in £GBP..." required>
-                      <label for='value'>Inserire Valore in £GBP</label>
+                      <input style="background-color: rgba(255, 255, 255, 0.7);" type='number' id="value${resume[i].id}" class='form-control roundedCorner mx-auto' placeholder="Inserire £GBP..." required>
+                      <label for='value'>Inserire £GBP</label>
                   </div>
                       <input type='hidden' id="wallet${resume[i].id}" value="${resume[i].id}">
                       </div>
@@ -41,9 +41,8 @@ $(document).ready(function () {
           $(`#value${valueCookie}`).prop('required', true);
         }
         Swal.fire({
-            title: 'Vuoi salvare lo statement?',
+            title: 'Vuoi salvare lo Statement Corrente?',
             showDenyButton: true,
-            showCancelButton: true,
             confirmButtonText: `Salva`,
             denyButtonText: `Non Salvare`,
             icon: 'question',
@@ -71,11 +70,11 @@ $(document).ready(function () {
                 $('#date').val('');
                 document.cookie.split(";").forEach(function(c) { document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/"); });
                 Swal.fire({
-                    title: 'Salvataggio Completato! Vuoi effettuare un nuovo statement?',
+                    title: 'Salvataggio Completato!',
+                    text: "Effettuare un nuovo Statement?",
                     showDenyButton: true,
-                    showCancelButton: true,
                     confirmButtonText: `Si`,
-                    denyButtonText: `No`,
+                    denyButtonText: `No, Torna alla Homepage`,
                     icon: 'success'
                   }).then((result) => {
                     if (result.isConfirmed) {
@@ -84,29 +83,30 @@ $(document).ready(function () {
                             toast: true,
                             position: 'top-end',
                             showConfirmButton: false,
-                            timer: 1500,
+                            timer: 1000,
                             timerProgressBar: true,
                           })
                           
                           Toast.fire({
                             icon: 'success',
-                            title: 'Reinderizzazione...'
+                            title: 'Renderizzazione Homepage...'
                           })
                           setTimeout(function () {
                             window.location.href = "homepage.html";
-                          }, 1500);
+                          }, 1000);
                       }
                     })
             } else if (result.isDenied) {
-              Swal.fire('Changes are not saved', '', 'info')
+              Swal.fire(
+                'Operazione Interrotta',
+                'Statement non Aggiunto!',
+                'error'
+              )
             }
-          })
-        
-        
+          })        
   })
 
     function addStatement(statement) {
-        console.log("Dentro funzione")
         $.ajax({
             type: "POST",
             url: "/statement/post",
@@ -116,6 +116,10 @@ $(document).ready(function () {
             }
         });
     }
+
+    $('.resetCookies').on('click', function resetCookies(){
+      document.cookie.split(";").forEach(function(c) { document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/"); });
+    })
 
 });
 

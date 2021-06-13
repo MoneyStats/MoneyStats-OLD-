@@ -8,7 +8,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/accountmanager")
-public class AccountController {
+public class
+AccountController {
 
     @GetMapping
     public String get() {

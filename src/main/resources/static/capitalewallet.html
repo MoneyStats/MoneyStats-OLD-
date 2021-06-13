@@ -30,24 +30,29 @@
           <a href="homepage.html"><figure class="hover-rotate"><img src='./logos/logo_transparent.png' alt='block' style='width: 200px;'></figure></a>   
           <button class='navbar-toggler' type='button' data-bs-toggle='collapse' data-bs-target='#navbarSupportedContent' aria-controls='navbarSupportedContent' aria-expanded='false' aria-label='Toggle navigation'>   
           <span class='navbar-toggler-icon'></span>   
-          </button>   
-              <div class='collapse navbar-collapse' id='navbarSupportedContent'>   
-                 <ul class='navbar-nav ms-auto mb-2 mb-lg-0'>   
-                   <li class='nav-item'>   
-                     <a class='nav-link active' aria-current='page' href='homepage.html'>Home</a>   
-                   </li>
+          </button>
+              <div class='collapse navbar-collapse' id='navbarSupportedContent'>
+                 <ul class='navbar-nav ms-auto mb-2 mb-lg-0'>
                    <li class='nav-item'>   
                     <a class='nav-link active' aria-current='page' href='javascript:history.back()'>Indietro</a>   
                   </li>
-                  <li class='nav-item'>   
-                    <a class='nav-link active' aria-current='page' href='/logout'>Logout</a>   
-                  </li> 
+                  <li class='nav-item dropdown'>   
+                    <a class='nav-link dropdown-toggle' href='#' id='navbarDropdown' role='button' data-bs-toggle='dropdown' aria-expanded='false'>   
+                          Opzioni   
+                    </a>   
+                    <ul class='dropdown-menu dropdown-menu-lg-end' aria-labelledby='navbarDropdown'> 
+                        <li><a class='dropdown-item disabled' href='#'>Gestione Account</a></li>    
+                         <li><a class='dropdown-item' href='changelog.html'>Changelog</a></li>   
+                         <li><a class='dropdown-item' href='/logout'>Logout</a></li>  
+                     </ul>   
+                 </li>
+                 </ul>
                    
               
           </div>   
       </div>   
   </nav> 
-  <body class="loginpage">
+  <body class="capitale">
     <div class="main-content">
         <div class="header pb-8 pt-5 pt-md-8">
           <div class="container-fluid">
@@ -101,5 +106,9 @@
         <!-- Page content -->
       </div>
       <!--Main layout-->
+            </div>
+          </div>
+        </div>
+      </div>
   </body>
   </html>

@@ -24,6 +24,14 @@ $(document).ready(function () {
     }
     getWallet();
 
+    const swalWithBootstrapButtons = Swal.mixin({
+        customClass: {
+          confirmButton: 'btn btn-success',
+          cancelButton: 'btn btn-danger',
+          denyButton: 'btn btn-danger'
+        },
+        buttonsStyling: false
+      })
     // MODALE AGGIUNGI WALLET HOMEPAGE
         $('#aggiungiWallet').click(function () {
             const wallet = {
@@ -32,7 +40,20 @@ $(document).ready(function () {
                     id: $('#catOptionhtml').val(),
                 }
             }
-            addWallet(wallet);
+            Swal.fire({
+                icon: 'question',
+                title: `Confermi il salvataggio di ${wallet.name}?`,
+                showDenyButton: true,
+                confirmButtonText: `Salva`,
+                denyButtonText: `Non Salvare`,
+              }).then((result) => {
+                if (result.isConfirmed) {
+                    addWallet(wallet);
+                } else if (result.isDenied) {
+                  swalWithBootstrapButtons.fire(`Portafoglio non Aggiunto`, '', 'info')
+                }
+              })
+            
 
         $('#value').val('');
         $('#date').val('');
@@ -47,7 +68,10 @@ $(document).ready(function () {
             data: JSON.stringify(wallet),
             contentType: 'application/json',
             success: function (response) {
-                console.log("Sono aggiunto")
+                Swal.fire('Salvato!', '', 'success')
+            },
+            error: function (err){
+
             }
         });
     }

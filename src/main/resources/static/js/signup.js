@@ -12,11 +12,11 @@ $(document).ready(function () {
                   title: 'INSERITO!',
                   text: 'Utente inserito Correttamente',
                   showConfirmButton: false,
-                  timer: 1500
+                  timer: 1000
               }),
               setTimeout(function (render) {
                   window.location.href='loginpage.html';
-              }, 2000)
+              }, 1000)
           },
           error: function () {
               Swal.fire({

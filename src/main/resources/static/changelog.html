@@ -31,18 +31,14 @@
           <span class='navbar-toggler-icon'></span>   
           </button>   
               <div class='collapse navbar-collapse' id='navbarSupportedContent'>   
-                 <ul class='navbar-nav ms-auto mb-2 mb-lg-0'>   
-                   <li class='nav-item'>   
-                     <a class='nav-link active' aria-current='page' href='homepage.html'>Home</a>   
-                   </li>
+                 <ul class='navbar-nav ms-auto mb-2 mb-lg-0'>
                    <li class='nav-item'>   
                     <a class='nav-link active' aria-current='page' href='javascript:history.back()'>Indietro</a>   
                   </li>
                   <li class='nav-item'>   
                     <a class='nav-link active' aria-current='page' href='/logout'>Logout</a>   
                   </li> 
-                   
-              
+                  </ul>
           </div>   
       </div>   
   </nav> 
@@ -56,28 +52,40 @@
                                   <figure class="hover-rotate mx-auto"> 
                                   <img src='./logos/linkedin_banner_image_1.png' alt='autori' style='width: 200px; border-radius: 100px;'>
                                   </figure>
-                                  <p class='fs-2 text-dark fw-bolder'>MoneyStats V0.30 Alpha 3</p>
+                                  <p class='fs-2 text-dark fw-bolder'>MoneyStats V0.80 Beta 1</p>
                                   <p class='fs-1 text-dark'>ChangeLog</p>
                                   </div> 
                                   <div class="accordion" id="accordionExample">
                                     <div class="accordion-item">
                                       <h2 class="accordion-header" id="headingOne">
                                         <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                          05-06-2021 - NotEatYet V1.00 Beta 1 
+                                          13-06-2021 - MoneyStats V0.80 Beta 1 
                                         </button>
                                       </h2>
                                       <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                                         <div class="accordion-body">
                                           <strong class="text-dark fs-3">BackEnd</strong><br>
-                                          - Aggiunto Controller Statement, ed implementato metodo personalizzato per la data e metodo di aggiunta Statement, per ora solo separato, ricordarsi di inserire piu in avanti un opzione Note. <br>
-                                          - Aggiunti nuovi metodi nella sezione category e wallet, tra cui l'aggiunta del wallet, ricordarsi di inserire Note. <br>
+                                          - Implementazione metodo Aggiunta nuovo Portafoglio (Bug Fixed). <br>
+                                          - Implementazione metodo Visualizzazione Statement secondo data. <br>
+                                          - Implementazione metodo Visualizzazione Date. <br>
+                                          - Implementazione metodo Aggiunta nuovo Statement. <br>
+                                          - Aggiunta Classe MySQLCustomDialect. <br>
                                           
                                           <hr>
                                           <strong class="text-dark fs-3">FrontEnd</strong><br>
-                                          <strong>Giovanni Lamarmora</strong><br>
-                                          - Implementazione html aggiungi wallet, aggiungi Statement, da rivedere l'aggiunta multipla. <br>
-                                          - Separazione compiti JS, da rivedere meglio. <br>
-                                          - Aggiunta opzione di visualizzazione wallet secondo data. <br>
+                                          - Bug Fixed Cookie Not Reset. <br>
+                                          - Migliorata la velocità di renderizzazione Pagina. <br>
+                                          - Aggiunto modale per la conferma di un nuovo Statement. <br>
+                                          - Aggiunto modale per conferma Aggiunta nuovo Portafoglio. <br>
+                                          - Sezione Homepage:<br>
+                                          1. - Implementazione Totale Capitale, Pil Totale e Pil rispetto alla Penultimo Statement, Pil Totale in valuta. <br>
+                                          2. - Implementazione di entrambi i Grafici. <br>
+                                          3. - Implementazione Ultimi 5 Statement. <br>
+                                          - Nuova Grafica Nell'aggiungi Statement.<br>
+                                          - Nuovi Bottoni nella NavBar.<br>
+                                          - Aggiunta Pagina di Resoconto secondo Data.<br>
+                                          - Aggiunta Pagina Storico Annuale.<br>
+                                          - Aggiunta Pagina Storico Totale.<br>
                                         </div>
                                       </div>
                                     </div>
@@ -95,7 +103,6 @@
                                           
                                           <hr>
                                           <strong class="text-dark fs-3">FrontEnd</strong><br>
-                                          <strong>Giovanni Lamarmora</strong><br>
                                           - Implementazione html aggiungi wallet, aggiungi Statement, da rivedere l'aggiunta multipla. <br>
                                           - Separazione compiti JS, da rivedere meglio. <br>
                                           - Aggiunta opzione di visualizzazione wallet secondo data. <br>

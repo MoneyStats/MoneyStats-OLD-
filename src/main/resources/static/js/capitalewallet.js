@@ -5,7 +5,7 @@ $(document).ready(function () {
     // WALLET NELLA CARD
     function getWallet(){
         $.get('/wallet/list', function (resume) {
-          $('#title').text('Capitale ' + document.cookie);
+          $('#title').text('MoneyStats - Capitale ' + document.cookie);
          //   document.cookie.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/");
          console.log(document.cookie);
          const listWallet = $('#capitalewallet');
