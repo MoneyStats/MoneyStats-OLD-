@@ -234,7 +234,7 @@
 
         <!-- MODAL PORTAFOGLI DISPONIBILI -->
         <div class="modal fade" id="wallet" tabindex="-1" aria-labelledby="walletModal" aria-hidden="true">
-          <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered">
           <div class="modal-content opacity" style="border-radius: 20px;">
               <div class="modal-header">
                       <img src="./logos/favicon_trasparent.png" alt="block" style="width: 50px; border-radius: 100px; padding-right: 10px;">
@@ -247,7 +247,7 @@
                     <tr>
                       <th scope="col">Nome Portafoglio</th>
                       <th scope="col">Categoria</th>
-                      <th scope="col">Opzioni</th>
+                      <th scope="col" style="width: 100px; text-align: center;">Opzioni</th>
                     </tr>
                   </thead>
                   <tbody id="listWallet"></tbody>
@@ -261,7 +261,7 @@
   </div>
   <!-- MODAL CATEGORIE DISPONIBILI -->
   <div class="modal fade" id="category" tabindex="-1" aria-labelledby="categoryModal" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered">
     <div class="modal-content opacity" style="border-radius: 20px;">
         <div class="modal-header">
                 <img src="./logos/favicon_trasparent.png" alt="block" style="width: 50px; border-radius: 100px; padding-right: 10px;">
@@ -272,8 +272,8 @@
           <table class="table table-striped table-hover">
             <thead>
               <tr>
+                <th style="width: 50px;" scope="col"></th>
                 <th scope="col">Nome Categoria</th>
-                <th scope="col">Opzioni</th>
               </tr>
             </thead>
             <tbody id="listCategory"></tbody>

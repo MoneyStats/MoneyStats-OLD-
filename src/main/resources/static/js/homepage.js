@@ -258,17 +258,17 @@ $(document).ready(function () {
         console.log(year)
         const dataTabella = $('#data');
         for (let i = 0; i < data.length; i++) {
-          if (data[i].includes(year)){
-            $.get(`/statement/statementbydate/${data[i]}`, function (statementTab) {
-              // DATA PER TABELLA
-              $(`<tr id="data${i}"><th scope="row">${data[i]}</th></tr>`).hide().appendTo(dataTabella).fadeIn(i * 20);
-              const statTab = $(`#data${i}`)
-            // Fine calcolo
-              for (let y = 0; y < statementTab.length; y++){
-                $(`<td>£ ${statementTab[y].value}</td>`).hide().appendTo(statTab).fadeIn(i * 20);
-              }
-            })
-          }
+            if (data[i].includes(year)){
+              $.get(`/statement/statementbydate/${data[i]}`, function (statementTab) {
+                // DATA PER TABELLA
+                $(`<tr id="data${i}"><th scope="row">${data[i]}</th></tr>`).hide().appendTo(dataTabella).fadeIn(i * 20);
+                const statTab = $(`#data${i}`)
+              // Fine calcolo
+                for (let y = 0; y < statementTab.length; y++){
+                  $(`<td>£ ${statementTab[y].value}</td>`).hide().appendTo(statTab).fadeIn(i * 20);
+                }
+              })
+            }
         }
           
       })

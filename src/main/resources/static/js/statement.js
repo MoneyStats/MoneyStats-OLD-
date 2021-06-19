@@ -4,6 +4,62 @@ $(document).ready(function () {
             const listWallet = $('#listWallet');
             for (let i = 0; i < resume.length; i++) {
                 document.cookie = "id"+i+" = " + resume[i].id;
+                let img = '';
+                let color = '';
+                switch (resume[i].category.name){
+                    case 'Contanti':
+                        img = 'fas fa-money-bill-wave';
+                        color = 'bg-success';
+                        break;
+                    case 'Conto Corrente':
+                        img = 'fas fa-landmark';
+                        color = 'bg-warning';
+                        break;
+                    case 'Carte di Credito':
+                        img = 'far fa-credit-card';
+                        color = 'bg-danger';
+                        break;
+                    case 'Carte di Debito':
+                        img = 'fas fa-credit-card';
+                        color = 'bg-dark';
+                        break;
+                    case 'Cupon':
+                        img = 'fas fa-receipt';
+                        color = 'bg-info';
+                        break;
+                    case 'Risparmi':
+                        img = 'fas fa-piggy-bank';
+                        color = 'bg-success';
+                        break;
+                    case 'Cash Elettronico':
+                        img = 'fas fa-money-bill';
+                        color = 'bg-primary';
+                        break;
+                    case 'Investimenti':
+                        img = 'fas fa-chart-line';
+                        color = 'bg-primary';
+                        break;
+                    case 'Mutui':
+                        img = 'fas fa-balance-scale-left';
+                        color = 'bg-danger';
+                        break;
+                    case 'Assicurazioni':
+                        img = 'fas fa-file-invoice-dollar';
+                        color = 'bg-warning';
+                        break;
+                    case 'Assegni':
+                        img = 'fas fa-money-check-alt';
+                        color = 'bg-info';
+                        break;
+                    case 'Altro':
+                        img = 'fas fa-hand-holding-usd';
+                        color = 'bg-secondary';
+                        break;
+                    default:
+                        img = 'fas fa-chart-bar';
+                        color = 'bg-dark';
+                        break;
+                }
                 $(`<div class="col-xl-3 col-sm-6" style="margin-bottom: 30px;">
                 <div class="card card-stats mb-4 mb-xl-0">
                   <div class="card-body">
@@ -18,8 +74,8 @@ $(document).ready(function () {
                       <input type='hidden' id="wallet${resume[i].id}" value="${resume[i].id}">
                       </div>
                       <div class="col-auto">
-                      <div class="icon icon-shape bg-danger text-white rounded-circle shadow">
-                          <i class="fas fa-chart-bar"></i>
+                      <div class="icon icon-shape ${color} text-white rounded-circle shadow">
+                        <i class="${img}"></i>
                           </div>
                           </div>
                     </div>

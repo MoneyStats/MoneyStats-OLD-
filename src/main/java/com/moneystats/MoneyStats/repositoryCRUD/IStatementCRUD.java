@@ -24,4 +24,5 @@ public interface IStatementCRUD extends JpaRepository<Statement, Integer>{
     @Query(value = "select statements.date, group_concat(statements.wallet.id) as wallet, group_concat(statements.value) from Statement statements where statements.user.id = :userId group by statements.date")
     List<String> findStatementByDateOrdered(int userId);
 
+    List<Statement> findStatementByWalletId(int id);
 }

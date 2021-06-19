@@ -9,4 +9,8 @@ import java.util.List;
 @Repository
 public interface IWalletCRUD extends JpaRepository<Wallet, Integer> {
     List<Wallet> findWalletsByCategoryId(Integer id);
+
+    List<Wallet> findAllByUserId(int userId);
+
+    Wallet findWalletsById(int id);
 }

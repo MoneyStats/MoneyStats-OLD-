@@ -1,5 +1,7 @@
 package com.moneystats.MoneyStats.model;
 
+import com.moneystats.MoneyStats.auth.User;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -13,18 +15,21 @@ public class Wallet {
     @ManyToOne
     @JoinColumn(name = "category_id", nullable = false)
     private Category category;
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
     @Transient
     private List<Statement> statementList;
 
-    public Wallet(int id, String name, Category category, List<Statement> statementList) {
+    public Wallet(int id, String name, Category category, User user, List<Statement> statementList) {
         this.id = id;
         this.name = name;
         this.category = category;
+        this.user = user;
         this.statementList = statementList;
     }
 
     public Wallet() {
-
     }
 
     public int getId() {
@@ -49,6 +54,14 @@ public class Wallet {
 
     public void setCategory(Category category) {
         this.category = category;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public List<Statement> getStatementList() {

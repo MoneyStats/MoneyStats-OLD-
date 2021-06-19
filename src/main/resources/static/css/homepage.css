@@ -9,6 +9,10 @@
 	border-radius: 100px !important;
 }
 
+.space {
+  border-spacing: 0;
+}
+
 /* EFFETTO ROTAZIONE IMG ON MOUSE */
 .hover-rotate {
     overflow: hidden;

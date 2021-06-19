@@ -39,7 +39,7 @@ public class ControllerStatement {
     }
 
     @GetMapping("/datestatement")
-     public List<String> listDate(Principal principal){
+     public List<String> listbyDate(Principal principal){
         String username = principal.getName();
         User utente = (User) utenteGEST.findByUsername(username).orElse(null);
         for (int i = 0; i < statementGEST.selectdistinctstatement(utente.getId()).size(); i++){
