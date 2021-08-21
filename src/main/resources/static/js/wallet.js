@@ -12,7 +12,7 @@ $(document).ready(function () {
                     <div class="btn-group roundedCorner" role="group">
                         <button id="btnGroupDrop1" type="button" class="btn btn-outline-primary roundedCorner dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Opzioni</button>
                             <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-                                <li><a class="dropdown-item btn-modifica-risto" data-bs-toggle="modal" data-bs-target="#modifica" data-id='${resume[i].id}'>Modifica</a></li>
+                                <li><a class="dropdown-item btn-modifica-wallet" data-bs-toggle="modal" data-bs-target="#editWallet" data-id='${resume[i].id}'>Modifica</a></li>
                                 <li><a class="dropdown-item btn-elimina-wallet" data-id='${resume[i].id}'>Elimina</a></li>
                             </ul>
                     </div>
@@ -121,22 +121,22 @@ $(document).ready(function () {
             ) {
                 swalWithBootstrapButtons.fire(
                     'Uscita',
-                    'Il tuo Ristorante è salvo',
+                    'Il tuo Wallet è salvo',
                     'error'
                 )
             }
         })
     });
 
-    //Modifica un ristorante dalla lista principale
+    //Modifica il wallet dalla lista principale
     let editMode = false;
     let idModifica = -1;
 
-    function modificaRistorante(ristorante) {
+    function modificaWallet(wallet) {
         $.ajax({
             type: "PUT",
-            url: `/user/ristorantiuser`,
-            data: JSON.stringify(ristorante),
+            url: `/wallet/update`,
+            data: JSON.stringify(wallet),
             contentType: 'application/json',
             dataType: 'json',
             success: function (response) {
@@ -149,43 +149,27 @@ $(document).ready(function () {
         });
     }
 
-    $('#listaRistorantiUser').on('click', '.btn-modifica-risto', function () {
+    $('#listWallet').on('click', '.btn-modifica-wallet', function () {
         editMode = true;
-        const id = +$(this).attr('data-id');
-        idModifica = id;
-        $.get(`/user/ristorantiuser/${id}`, function (modifica) {
-            let img = '';
-            if (modifica.immagini === null) {
-                img = '../logos/logo.png';
-            } else {
-                img = '../upload/' + modifica.immagini;
-            }
-        $('#modificaRistoranteLogo').attr('src', img);
-            $('#ragionesociale').val(modifica.ragionesociale);
-            $('#piva').val(modifica.piva);
-            $('#cittaRistorante').val(modifica.citta);
-            $('#regioneRistorante').val(modifica.regione);
-            $('#viaRistorante').val(modifica.via);
-            $('#ncivico').val(modifica.ncivico);
-            $('#modificaRistoranteTitle').text('Modifica ' + modifica.ragionesociale);
-            $('#modificaRistorante').text('Modifica ' + modifica.ragionesociale);
-            $('#title').text('Modifica ' + modifica.ragionesociale);
+        var idWallet = +$(this).attr('data-id');
+        idModifica = idWallet;
+
         });
-    });
-    $('#modificaRistorante').click(function () {
-        const ristorante = {
-            ragionesociale: $('#ragionesociale').val(),
-            piva: $('#piva').val(),
-            citta: $('#cittaRistorante').val(),
-            regione: $('#regioneRistorante').val(),
-            via: $('#viaRistorante').val(),
-            ncivico: $('#ncivico').val()
+
+    $('#editWalletbtn').click(function () {
+        editMode = true;
+        const wallet = {
+            id: idModifica,
+            name:  $('#nameEdit').val(),
+            category: {
+                id: $('#catOptionhtml2').val(),
+            }
         }
-        console.log(ristorante);
+        console.log(wallet);
         if (editMode) {
             Swal.fire({
                 icon: 'question',
-                title: 'Vuoi salvare la Modifica di ' + ristorante.ragionesociale + '?',
+                title: 'Vuoi salvare la Modifica di ' + wallet.name + '?',
                 showDenyButton: true,
                 showCancelButton: true,
                 confirmButtonText: `Salva`,
@@ -194,10 +178,10 @@ $(document).ready(function () {
                 /* Read more about isConfirmed, isDenied below */
                 if (result.isConfirmed) {
                     Swal.fire('Salvato!', '', 'success')
-                    ristorante.id = idModifica;
-                    modificaRistorante(ristorante);
+                    wallet.id = idModifica;
+                    modificaWallet(wallet);
                     setTimeout(function () {
-                        window.location.href = 'ristorantiUser.html';
+                        window.location.href = 'homepage.html';
                     }, 2000);
                 } else if (result.isDenied) {
                     Swal.fire('Modifiche non salvate', '', 'info')

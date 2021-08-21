@@ -5,6 +5,7 @@ $(document).ready(function () {
             console.log(resume);
             const listCategory = $('#listCategory');
             const optionCategory = $('#catOptionhtml');
+            const optionCategory2 = $('#catOptionhtml2');
             for (let i = resume.length - 1; i >= 0; i--) {
                 let img = '';
                 let color = '';
@@ -71,6 +72,7 @@ $(document).ready(function () {
                 <td class='space' style='margin-left: 0px;'>${resume[i].name}</td>
             </tr>`).hide().appendTo(listCategory).fadeIn(i * 20);
             $(`<option id='walletSelect' class="roundedCorner" value="${resume[i].id}">${resume[i].name}</option>`).hide().appendTo(optionCategory).fadeIn(i * 20);
+            $(`<option id='walletSelect' class="roundedCorner" value="${resume[i].id}">${resume[i].name}</option>`).hide().appendTo(optionCategory2).fadeIn(i * 20);
             }
         })
     }

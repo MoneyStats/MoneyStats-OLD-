@@ -60,4 +60,11 @@ public class ControllerWallet {
         }
         walletGEST.deleteById(id);
     }
+
+    @PutMapping("/update")
+    public void updateWallet(@RequestBody Wallet walletToEdit) {
+        Wallet wallet = walletGEST.findById(walletToEdit.getId()).orElse(null);
+        walletToEdit.setUser(wallet.getUser());
+        walletGEST.save(walletToEdit);
+    }
 }
