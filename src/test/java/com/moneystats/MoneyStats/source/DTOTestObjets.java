@@ -1,7 +1,11 @@
 package com.moneystats.MoneyStats.source;
 
+import com.moneystats.MoneyStats.auth.User;
 import com.moneystats.MoneyStats.category.DTO.CategoryDTO;
 import com.moneystats.MoneyStats.category.entity.CategoryEntity;
+import com.moneystats.MoneyStats.statement.entity.StatementEntity;
+import com.moneystats.MoneyStats.wallet.DTO.WalletDTO;
+import com.moneystats.MoneyStats.wallet.entity.WalletEntity;
 
 import java.util.List;
 
@@ -20,5 +24,20 @@ public class DTOTestObjets {
                     new CategoryEntity(2, "Debit Card"),
                     new CategoryEntity(3, "Cash"),
                     new CategoryEntity(4, "Investment")
+            );
+
+    public static List<WalletDTO> walletDTOS =
+            List.of(
+                    new WalletDTO("My-Wallet-Name", new CategoryEntity(1, "Credit Card"), null, null),
+                    new WalletDTO("My-Wallet-Name1", new CategoryEntity(1, "Credit Card"), null, null),
+                    new WalletDTO("My-Wallet-Name2", new CategoryEntity(1, "Credit Card"), null, null),
+                    new WalletDTO("My-Wallet-Name3", new CategoryEntity(1, "Credit Card"), null, null)
+            );
+    public static List<WalletEntity> walletEntities =
+            List.of(
+                    new WalletEntity(1, "My-Wallet-Name", new CategoryEntity(1, "Credit Card"), null, null),
+                    new WalletEntity(2, "My-Wallet-Name1", new CategoryEntity(1, "Credit Card"), null, null),
+                    new WalletEntity(3,"My-Wallet-Name2", new CategoryEntity(1, "Credit Card"), null, null),
+                    new WalletEntity(4, "My-Wallet-Name3", new CategoryEntity(1, "Credit Card"), null, null)
             );
 }
