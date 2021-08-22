@@ -1,6 +1,6 @@
 package com.moneystats.MoneyStats.category;
 
-import com.moneystats.MoneyStats.category.entity.CategoryEntity;
+import com.moneystats.MoneyStats.category.DTO.CategoryDTO;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -12,11 +12,10 @@ import java.util.List;
 @RequestMapping("/category")
 public class CategoryController {
 
-    @Inject
-    ICategoryDAO categoryDAO;
+    @Inject CategoryService categoryService;
 
     @GetMapping("/list")
-    public List<CategoryEntity> categoryList() {
-        return categoryDAO.findAll();
+    public List<CategoryDTO> categoryList() throws CategoryException {
+        return categoryService.categoryDTOList();
     }
 }

@@ -7,7 +7,7 @@ $(document).ready(function () {
             for (let i = resume.length - 1; i >= 0; i--) {
                 $(`<tr id='riga-${resume[i].id}'>
                 <td>${resume[i].name}</td>
-                <td>${resume[i].category.name}</td>
+                <td>${resume[i].categoryEntity.name}</td>
                 <td>
                     <div class="btn-group roundedCorner" role="group">
                         <button id="btnGroupDrop1" type="button" class="btn btn-outline-primary roundedCorner dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Opzioni</button>

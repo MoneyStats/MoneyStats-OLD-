@@ -8,12 +8,12 @@ import java.io.Serializable;
 
 public class StatementDTO implements Serializable {
 
-@NotNull String date;
-@NotNull Double value;
+@NotNull private String date;
+@NotNull private Double value;
 @NotNull
-    User user;
+    private User user;
 @NotNull
-    WalletEntity walletEntity;
+    private WalletEntity walletEntity;
 
     public StatementDTO(@NotNull String date, @NotNull Double value, @NotNull User user, @NotNull WalletEntity walletEntity) {
         this.date = date;

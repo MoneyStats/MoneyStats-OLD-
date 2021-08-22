@@ -1,4 +1,59 @@
 package com.moneystats.MoneyStats.wallet.DTO;
 
-public class WalletDTO {
+import com.moneystats.MoneyStats.auth.User;
+import com.moneystats.MoneyStats.category.entity.CategoryEntity;
+import com.moneystats.MoneyStats.statement.entity.StatementEntity;
+
+import javax.validation.constraints.NotNull;
+import java.io.Serializable;
+import java.util.List;
+
+public class WalletDTO implements Serializable {
+
+    @NotNull private String name;
+    @NotNull private CategoryEntity categoryEntity;
+    @NotNull private User user;
+    @NotNull private List<StatementEntity> statementEntityList;
+
+    public WalletDTO(String name, CategoryEntity categoryEntity, User user, List<StatementEntity> statementEntityList) {
+        this.name = name;
+        this.categoryEntity = categoryEntity;
+        this.user = user;
+        this.statementEntityList = statementEntityList;
+    }
+
+    public WalletDTO() {
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public CategoryEntity getCategoryEntity() {
+        return categoryEntity;
+    }
+
+    public void setCategoryEntity(CategoryEntity categoryEntity) {
+        this.categoryEntity = categoryEntity;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public List<StatementEntity> getStatementEntityList() {
+        return statementEntityList;
+    }
+
+    public void setStatementEntityList(List<StatementEntity> statementEntityList) {
+        this.statementEntityList = statementEntityList;
+    }
 }

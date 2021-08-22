@@ -34,6 +34,13 @@ public class WalletEntity {
     public WalletEntity() {
     }
 
+    public WalletEntity(String name, CategoryEntity category, User user, List<StatementEntity> statementList) {
+        this.name = name;
+        this.category = category;
+        this.user = user;
+        this.statementList = statementList;
+    }
+
     public int getId() {
         return id;
     }

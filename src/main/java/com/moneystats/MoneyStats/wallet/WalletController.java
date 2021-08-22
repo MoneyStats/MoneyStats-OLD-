@@ -6,6 +6,8 @@ import com.moneystats.MoneyStats.category.ICategoryDAO;
 import com.moneystats.MoneyStats.category.entity.CategoryEntity;
 import com.moneystats.MoneyStats.statement.IStatementDAO;
 import com.moneystats.MoneyStats.statement.entity.StatementEntity;
+import com.moneystats.MoneyStats.wallet.DTO.WalletDTO;
+import com.moneystats.MoneyStats.wallet.DTO.WalletResponseDTO;
 import com.moneystats.MoneyStats.wallet.entity.WalletEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,46 +19,20 @@ import java.util.List;
 @RequestMapping("/wallet")
 public class WalletController {
 
-    @Inject
-    IWalletDAO walletDAO;
-
-    @Inject
-    ICategoryDAO categoryDAO;
-
-    @Inject
-    IStatementDAO statementDAO;
-
-    @Inject
-    UtenteCRUD utenteCRUD;
+    @Inject WalletService walletService;
 
     @GetMapping("/list")
-    public List<WalletEntity> getAll(Principal principal){
-        String username = principal.getName();
-        User utente = (User) utenteCRUD.findByUsername(username).orElse(null);
-        return walletDAO.findAllByUserId(utente.getId());
+    public List<WalletDTO> getAll(Principal principal) throws WalletException {
+        return walletService.getAll(principal);
     }
 
-    @PostMapping("/postWallet/{idcategory}")
-    public void addWallet(Principal principal, @PathVariable int idcategory, @RequestBody WalletEntity wallet){
-        String username = principal.getName();
-        User utente = (User) utenteCRUD.findByUsername(username).orElse(null);
-        wallet.setUser(utente);
-        CategoryEntity category = categoryDAO.findById(idcategory).orElse(null);
-        wallet.setCategory(category);
-        if (wallet != null){
-            WalletEntity wallet1 = walletDAO.save(wallet);
-        }
+    @PostMapping("/postWallet/{idCategory}")
+    public WalletResponseDTO addWallet(Principal principal, @PathVariable int idCategory, @RequestBody WalletDTO walletDTO) throws WalletException {
+        return walletService.addWalletEntity(principal, idCategory, walletDTO);
     }
 
     @DeleteMapping("/delete/{id}")
-    public void deleteWallet(@PathVariable int id){
-        WalletEntity wallet = walletDAO.findById(id).orElse(null);
-        wallet.setStatementList(statementDAO.findStatementByWalletId(wallet.getId()));
-        if (wallet.getStatementList() != null){
-            for (StatementEntity s : wallet.getStatementList()) {
-                statementDAO.deleteById(s.getId());
-            }
-        }
-        walletDAO.deleteById(id);
+    public WalletResponseDTO deleteWallet(@PathVariable int idWallet) throws WalletException {
+        return walletService.deleteWalletEntity(idWallet);
     }
 }
