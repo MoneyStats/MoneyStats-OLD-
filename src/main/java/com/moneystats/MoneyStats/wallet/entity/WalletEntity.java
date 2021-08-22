@@ -12,7 +12,7 @@ import java.util.List;
 public class WalletEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
     private String name;
     @ManyToOne
     @JoinColumn(name = "category_id", nullable = false)
@@ -23,7 +23,7 @@ public class WalletEntity {
     @Transient
     private List<StatementEntity> statementList;
 
-    public WalletEntity(int id, String name, CategoryEntity category, User user, List<StatementEntity> statementList) {
+    public WalletEntity(Integer id, String name, CategoryEntity category, User user, List<StatementEntity> statementList) {
         this.id = id;
         this.name = name;
         this.category = category;
@@ -41,11 +41,11 @@ public class WalletEntity {
         this.statementList = statementList;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

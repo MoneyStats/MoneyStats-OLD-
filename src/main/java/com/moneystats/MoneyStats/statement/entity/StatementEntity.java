@@ -12,7 +12,7 @@ public class StatementEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String date;
-    private double value;
+    private Double value;
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
@@ -20,14 +20,14 @@ public class StatementEntity {
     @JoinColumn(name = "wallet_id", nullable = false)
     private WalletEntity wallet;
 
-    public StatementEntity(int id, String date, double value, User user, WalletEntity wallet) {
+    public StatementEntity(int id, String date, Double value, User user, WalletEntity wallet) {
         this.id = id;
         this.date = date;
         this.value = value;
         this.user = user;
         this.wallet = wallet;
     }
-    public StatementEntity(String date, double value, User user, WalletEntity wallet) {
+    public StatementEntity(String date, Double value, User user, WalletEntity wallet) {
         this.date = date;
         this.value = value;
         this.user = user;
@@ -55,11 +55,11 @@ public class StatementEntity {
         this.date = date;
     }
 
-    public double getValue() {
+    public Double getValue() {
         return value;
     }
 
-    public void setValue(double value) {
+    public void setValue(Double value) {
         this.value = value;
     }
 

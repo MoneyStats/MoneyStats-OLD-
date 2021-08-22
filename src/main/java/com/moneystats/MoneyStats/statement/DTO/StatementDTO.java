@@ -15,14 +15,13 @@ public class StatementDTO implements Serializable {
 @NotNull
     private WalletEntity walletEntity;
 
-    public StatementDTO(@NotNull String date, @NotNull Double value, @NotNull User user, @NotNull WalletEntity walletEntity) {
+    public StatementDTO(String date, Double value, User user, WalletEntity walletEntity) {
         this.date = date;
         this.value = value;
         this.user = user;
         this.walletEntity = walletEntity;
     }
 
-    @NotNull
     public String getDate() {
         return date;
     }
@@ -31,7 +30,6 @@ public class StatementDTO implements Serializable {
         this.date = date;
     }
 
-    @NotNull
     public Double getValue() {
         return value;
     }
@@ -40,7 +38,6 @@ public class StatementDTO implements Serializable {
         this.value = value;
     }
 
-    @NotNull
     public User getUser() {
         return user;
     }
@@ -49,7 +46,6 @@ public class StatementDTO implements Serializable {
         this.user = user;
     }
 
-    @NotNull
     public WalletEntity getWalletEntity() {
         return walletEntity;
     }
