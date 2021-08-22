@@ -2,16 +2,16 @@ package com.moneystats.MoneyStats.security;
 
 import com.moneystats.MoneyStats.auth.User;
 import com.moneystats.MoneyStats.auth.UtenteCRUD;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.inject.Inject;
 import java.util.List;
 
 @RestController
 @RequestMapping("/admin")
 public class ControllerUtenti {
 
-    @Autowired
+    @Inject
     UtenteCRUD utenteGEST;
 
 

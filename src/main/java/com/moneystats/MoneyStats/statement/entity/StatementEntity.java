@@ -1,7 +1,7 @@
 package com.moneystats.MoneyStats.statement.entity;
 
 import com.moneystats.MoneyStats.auth.User;
-import com.moneystats.MoneyStats.model.Wallet;
+import com.moneystats.MoneyStats.wallet.entity.WalletEntity;
 
 import javax.persistence.*;
 
@@ -18,16 +18,23 @@ public class StatementEntity {
     private User user;
     @ManyToOne
     @JoinColumn(name = "wallet_id", nullable = false)
-    private Wallet wallet;
+    private WalletEntity wallet;
 
-    public StatementEntity(int id, String date, double value, User user, Wallet wallet) {
+    public StatementEntity(int id, String date, double value, User user, WalletEntity wallet) {
         this.id = id;
         this.date = date;
         this.value = value;
         this.user = user;
         this.wallet = wallet;
     }
-@Deprecated
+    public StatementEntity(String date, double value, User user, WalletEntity wallet) {
+        this.date = date;
+        this.value = value;
+        this.user = user;
+        this.wallet = wallet;
+    }
+
+    @Deprecated
     public StatementEntity() {
 
     }
@@ -64,11 +71,11 @@ public class StatementEntity {
         this.user = user;
     }
 
-    public Wallet getWallet() {
+    public WalletEntity getWallet() {
         return wallet;
     }
 
-    public void setWallet(Wallet wallet) {
+    public void setWallet(WalletEntity wallet) {
         this.wallet = wallet;
     }
 }

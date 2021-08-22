@@ -1,14 +1,11 @@
 package com.moneystats.MoneyStats.statement;
 
-import com.moneystats.MoneyStats.auth.User;
-import com.moneystats.MoneyStats.auth.UtenteCRUD;
-import com.moneystats.MoneyStats.model.Statement;
-import com.moneystats.MoneyStats.model.Wallet;
-import com.moneystats.MoneyStats.repositoryCRUD.IStatementCRUD;
-import com.moneystats.MoneyStats.repositoryCRUD.IWalletCRUD;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.moneystats.MoneyStats.statement.DTO.StatementDTO;
+import com.moneystats.MoneyStats.statement.DTO.StatementResponseDTO;
+import com.moneystats.MoneyStats.statement.entity.StatementEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.inject.Inject;
 import java.security.Principal;
 import java.util.List;
 
@@ -16,53 +13,26 @@ import java.util.List;
 @RequestMapping("/statement")
 public class StatementController {
 
-    @Autowired
-    UtenteCRUD utenteGEST;
-
-    @Autowired
-    IStatementCRUD statementGEST;
-
-    @Autowired
-    IWalletCRUD walletGEST;
-
+    @Inject
+    StatementService statementService;
 
     @PostMapping("/post")
-    public void addStatement(Principal principal, @RequestBody Statement statement){
-        String username = principal.getName();
-        User utente = (User) utenteGEST.findByUsername(username).orElse(null);
-        statement.setUser(utente);
-        Wallet wallet = walletGEST.findById(statement.getWallet().getId()).orElse(null);
-        statement.setWallet(wallet);
-        if (statement != null){
-            Statement stat = statementGEST.save(statement);
-        }
+    public StatementResponseDTO addStatement(Principal principal, @RequestBody StatementDTO statement) throws StatementException{
+        return statementService.addStatement(principal, statement);
     }
 
     @GetMapping("/datestatement")
-     public List<String> listbyDate(Principal principal){
-        String username = principal.getName();
-        User utente = (User) utenteGEST.findByUsername(username).orElse(null);
-        for (int i = 0; i < statementGEST.selectdistinctstatement(utente.getId()).size(); i++){
-            System.out.println(statementGEST.selectdistinctstatement(utente.getId()));
-            return statementGEST.selectdistinctstatement(utente.getId());
-        }
-        return null;
+     public List<String> listbyDate(Principal principal) throws StatementException {
+        return statementService.listbyDate(principal);
     }
 
     @GetMapping("/statementbydate/{date}")
-    public List<Statement> listByDate(Principal principal, @PathVariable String date){
-        String username = principal.getName();
-        User utente = (User) utenteGEST.findByUsername(username).orElse(null);
-
-        List<Statement> statementList = statementGEST.findAllByUserIdAndDateOrderByWalletId(utente.getId(), date);
-        return statementList;
+    public List<StatementEntity> listByDate(Principal principal, @PathVariable String date) throws StatementException {
+        return statementService.listByDate(principal, date);
     }
 
     @GetMapping("/listStatement")
-    public List<String> listByWalletAndValue(Principal principal){
-        String username = principal.getName();
-        User utente = (User) utenteGEST.findByUsername(username).orElse(null);
-        List<String> statementsByWallet = statementGEST.findStatementByDateOrdered(utente.getId());
-        return statementsByWallet;
+    public List<String> listByWalletAndValue(Principal principal) throws StatementException {
+        return statementService.listByWalletAndValue(principal);
     }
 }

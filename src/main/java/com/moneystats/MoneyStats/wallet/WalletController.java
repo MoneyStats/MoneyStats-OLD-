@@ -2,15 +2,14 @@ package com.moneystats.MoneyStats.wallet;
 
 import com.moneystats.MoneyStats.auth.User;
 import com.moneystats.MoneyStats.auth.UtenteCRUD;
-import com.moneystats.MoneyStats.model.Category;
-import com.moneystats.MoneyStats.model.Statement;
-import com.moneystats.MoneyStats.model.Wallet;
-import com.moneystats.MoneyStats.repositoryCRUD.ICategoryCRUD;
-import com.moneystats.MoneyStats.repositoryCRUD.IStatementCRUD;
-import com.moneystats.MoneyStats.repositoryCRUD.IWalletCRUD;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.moneystats.MoneyStats.category.ICategoryDAO;
+import com.moneystats.MoneyStats.category.entity.CategoryEntity;
+import com.moneystats.MoneyStats.statement.IStatementDAO;
+import com.moneystats.MoneyStats.statement.entity.StatementEntity;
+import com.moneystats.MoneyStats.wallet.entity.WalletEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.inject.Inject;
 import java.security.Principal;
 import java.util.List;
 
@@ -18,46 +17,46 @@ import java.util.List;
 @RequestMapping("/wallet")
 public class WalletController {
 
-    @Autowired
-    IWalletCRUD walletGEST;
+    @Inject
+    IWalletDAO walletDAO;
 
-    @Autowired
-    ICategoryCRUD categoryGEST;
+    @Inject
+    ICategoryDAO categoryDAO;
 
-    @Autowired
-    IStatementCRUD statementCRUD;
+    @Inject
+    IStatementDAO statementDAO;
 
-    @Autowired
+    @Inject
     UtenteCRUD utenteCRUD;
 
     @GetMapping("/list")
-    public List<Wallet> getAll(Principal principal){
+    public List<WalletEntity> getAll(Principal principal){
         String username = principal.getName();
         User utente = (User) utenteCRUD.findByUsername(username).orElse(null);
-        return walletGEST.findAllByUserId(utente.getId());
+        return walletDAO.findAllByUserId(utente.getId());
     }
 
     @PostMapping("/postWallet/{idcategory}")
-    public void addWallet(Principal principal, @PathVariable int idcategory, @RequestBody Wallet wallet){
+    public void addWallet(Principal principal, @PathVariable int idcategory, @RequestBody WalletEntity wallet){
         String username = principal.getName();
         User utente = (User) utenteCRUD.findByUsername(username).orElse(null);
         wallet.setUser(utente);
-        Category category = categoryGEST.findById(idcategory).orElse(null);
+        CategoryEntity category = categoryDAO.findById(idcategory).orElse(null);
         wallet.setCategory(category);
         if (wallet != null){
-            Wallet wallet1 = walletGEST.save(wallet);
+            WalletEntity wallet1 = walletDAO.save(wallet);
         }
     }
 
     @DeleteMapping("/delete/{id}")
     public void deleteWallet(@PathVariable int id){
-        Wallet wallet = walletGEST.findById(id).orElse(null);
-        wallet.setStatementList(statementCRUD.findStatementByWalletId(wallet.getId()));
+        WalletEntity wallet = walletDAO.findById(id).orElse(null);
+        wallet.setStatementList(statementDAO.findStatementByWalletId(wallet.getId()));
         if (wallet.getStatementList() != null){
-            for (Statement s : wallet.getStatementList()) {
-                statementCRUD.deleteById(s.getId());
+            for (StatementEntity s : wallet.getStatementList()) {
+                statementDAO.deleteById(s.getId());
             }
         }
-        walletGEST.deleteById(id);
+        walletDAO.deleteById(id);
     }
 }

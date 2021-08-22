@@ -1,16 +1,16 @@
 package com.moneystats.MoneyStats.wallet;
 
-import com.moneystats.MoneyStats.model.Wallet;
+import com.moneystats.MoneyStats.wallet.entity.WalletEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Repository
-public interface IWalletDAO extends JpaRepository<Wallet, Integer> {
-    List<Wallet> findWalletsByCategoryId(Integer id);
+public interface IWalletDAO extends JpaRepository<WalletEntity, Integer> {
+    List<WalletEntity> findWalletsByCategoryId(Integer id);
 
-    List<Wallet> findAllByUserId(int userId);
+    List<WalletEntity> findAllByUserId(int userId);
 
-    Wallet findWalletsById(int id);
+    WalletEntity findWalletsById(int id);
 }
