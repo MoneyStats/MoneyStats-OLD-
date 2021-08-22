@@ -1,28 +1,36 @@
 package com.moneystats.MoneyStats.category;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.moneystats.MoneyStats.category.DTO.CategoryDTO;
-import com.moneystats.MoneyStats.category.entity.CategoryEntity;
 import com.moneystats.MoneyStats.source.DTOTestObjets;
 import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import java.util.List;
 
+@SpringBootTest
+@AutoConfigureMockMvc
 public class CategoryControllerTest {
 
-    @Mock private CategoryService categoryService;
-    @InjectMocks private CategoryController categoryController;
-    @Mock private ICategoryDAO categoryDAO;
+    @MockBean private CategoryService categoryService;
+    @Autowired private MockMvc mockMvc;
+    @Autowired private ObjectMapper objectMapper;
 
     @Test
-    public void testGetAllCategory_OK() throws CategoryException{
+    public void testGetAllCategory_OK() throws Exception {
         List<CategoryDTO> categoryDTOS = DTOTestObjets.categoryDTOList;
-        List<CategoryEntity> categoryEntities = DTOTestObjets.categoryEntities;
-        CategoryService categoryService1 = new CategoryService();
-        CategoryController categoryController1 = new CategoryController();
-        Mockito.when(categoryService1.categoryDTOList()).thenReturn(categoryDTOS);
-        Mockito.when(categoryDAO.findAll()).thenReturn(categoryEntities);
+        String categoryAsString = objectMapper.writeValueAsString(categoryDTOS);
+        Mockito.when(categoryService.categoryDTOList()).thenReturn(categoryDTOS);
+
+        mockMvc.perform(MockMvcRequestBuilders.get("/category/list"))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.content().json(categoryAsString));
     }
 }
