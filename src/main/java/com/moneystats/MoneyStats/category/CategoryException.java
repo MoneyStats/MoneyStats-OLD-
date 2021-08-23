@@ -36,7 +36,6 @@ public class CategoryException extends Exception{
     }
 
     public static enum Type {
-        CATEGORY_ENTITIES_NOT_FOUND,
-        CATEGORY_DTOS_NOT_FOUND
+        CATEGORY_NOT_FOUND
     }
 }

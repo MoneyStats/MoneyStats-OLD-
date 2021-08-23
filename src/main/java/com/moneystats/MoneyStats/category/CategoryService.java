@@ -21,7 +21,7 @@ public class CategoryService {
         List<CategoryEntity> categoryEntities = categoryDAO.findAll();
         if (categoryEntities.size() == 0){
             LOG.error("Category Not Found");
-            throw new CategoryException(CategoryException.Type.CATEGORY_ENTITIES_NOT_FOUND);
+            throw new CategoryException(CategoryException.Type.CATEGORY_NOT_FOUND);
         }
         List<CategoryDTO> categoryDTOS = new ArrayList<>();
         CategoryDTO categoryDTO;
@@ -29,10 +29,6 @@ public class CategoryService {
             categoryDTO = new CategoryDTO(
                     categoryEntity.getName());
             categoryDTOS.add(categoryDTO);
-        }
-        if (categoryDTOS.size() == 0){
-            LOG.error("Category DTO Not Found");
-            throw new CategoryException(CategoryException.Type.CATEGORY_DTOS_NOT_FOUND);
         }
         return categoryDTOS;
     }

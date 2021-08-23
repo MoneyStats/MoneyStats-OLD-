@@ -17,16 +17,12 @@ public class CategoryExceptionMapper implements ExceptionMapper<CategoryExceptio
 
     static {
         statueses = Map.of(
-                CategoryException.Type.CATEGORY_ENTITIES_NOT_FOUND,
-                Response.Status.NOT_FOUND,
-                CategoryException.Type.CATEGORY_DTOS_NOT_FOUND,
+                CategoryException.Type.CATEGORY_NOT_FOUND,
                 Response.Status.NOT_FOUND);
 
         bodies = Map.of(
-                CategoryException.Type.CATEGORY_ENTITIES_NOT_FOUND,
-                new ErrorResponseDTO("CATEGORY_ENTITIES_NOT_FOUND"),
-                CategoryException.Type.CATEGORY_DTOS_NOT_FOUND,
-                new ErrorResponseDTO("CATEGORY_DTOS_NOT_FOUND"));
+                CategoryException.Type.CATEGORY_NOT_FOUND,
+                new ErrorResponseDTO("CATEGORY_NOT_FOUND"));
     }
 
     /**

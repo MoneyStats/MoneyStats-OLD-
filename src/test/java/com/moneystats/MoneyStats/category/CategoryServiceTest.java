@@ -28,21 +28,11 @@ public class CategoryServiceTest {
         }
     }
     @Test
-    void categoryDTOList_testShouldReturnCategoryEntityNotFound() throws Exception{
-        CategoryException expected = new CategoryException(CategoryException.Type.CATEGORY_ENTITIES_NOT_FOUND);
+    void categoryDTOList_testShouldReturnCategoryNotFound() throws Exception{
+        CategoryException expected = new CategoryException(CategoryException.Type.CATEGORY_NOT_FOUND);
         CategoryException actual = Assertions.assertThrows(CategoryException.class, () -> categoryService.categoryDTOList());
 
         Assertions.assertEquals(expected.getType(), actual.getType());
 
-    }
-
-    @Test
-    void categoryDTOList_testShouldReturnCategoryDTONotFound() throws Exception{
-        Mockito.when(categoryService.categoryDTOList()).thenThrow(new CategoryException(CategoryException.Type.CATEGORY_DTOS_NOT_FOUND));
-
-        CategoryException expected = new CategoryException(CategoryException.Type.CATEGORY_DTOS_NOT_FOUND);
-        CategoryException actual = (CategoryException) categoryService.categoryDTOList();
-
-        Assertions.assertEquals(expected.getType(), actual.getType());
     }
 }
