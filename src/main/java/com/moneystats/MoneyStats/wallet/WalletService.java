@@ -1,6 +1,5 @@
 package com.moneystats.MoneyStats.wallet;
 
-import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,8 +9,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
-import com.moneystats.MoneyStats.auth.User;
-import com.moneystats.MoneyStats.auth.UtenteCRUD;
 import com.moneystats.MoneyStats.category.ICategoryDAO;
 import com.moneystats.MoneyStats.category.entity.CategoryEntity;
 import com.moneystats.MoneyStats.statement.IStatementDAO;
@@ -20,6 +17,14 @@ import com.moneystats.MoneyStats.wallet.DTO.WalletDTO;
 import com.moneystats.MoneyStats.wallet.DTO.WalletResponse;
 import com.moneystats.MoneyStats.wallet.DTO.WalletResponseDTO;
 import com.moneystats.MoneyStats.wallet.entity.WalletEntity;
+import com.moneystats.authentication.AuthCredentialDAO;
+import com.moneystats.authentication.AuthenticationException;
+import com.moneystats.authentication.TokenService;
+import com.moneystats.authentication.TokenValidation;
+import com.moneystats.authentication.DTO.AuthCredentialDTO;
+import com.moneystats.authentication.DTO.AuthCredentialInputDTO;
+import com.moneystats.authentication.DTO.TokenDTO;
+import com.moneystats.authentication.entity.AuthCredentialEntity;
 
 @Service
 public class WalletService {
@@ -27,21 +32,18 @@ public class WalletService {
 	private final Logger LOG = LoggerFactory.getLogger(this.getClass());
 
 	@Inject
-	IWalletDAO walletDAO;
+	private TokenService tokenService;
 	@Inject
-	UtenteCRUD userDAO;
+	private IWalletDAO walletDAO;
 	@Inject
-	ICategoryDAO categoryDAO;
+	private ICategoryDAO categoryDAO;
 	@Inject
-	IStatementDAO statementDAO;
+	private IStatementDAO statementDAO;
+	@Inject
+	private AuthCredentialDAO authCredentialDAO;
 
-	public List<WalletDTO> getAll(Principal principal) throws WalletException {
-		String username = principal.getName();
-		User utente = (User) userDAO.findByUsername(username).orElse(null);
-		if (utente == null) {
-			LOG.error("User Not Found");
-			throw new WalletException(WalletException.Type.USER_NOT_FOUND);
-		}
+	public List<WalletDTO> getAll(TokenDTO tokenDTO) throws WalletException, AuthenticationException {
+		AuthCredentialEntity utente = validateAndCreate(tokenDTO);
 		List<WalletEntity> walletEntities = walletDAO.findAllByUserId(utente.getId());
 		if (walletEntities.size() == 0) {
 			LOG.error("Wallet Not Found");
@@ -58,15 +60,10 @@ public class WalletService {
 		return walletDTOS;
 	}
 
-	public WalletResponseDTO addWalletEntity(Principal principal, Integer idCategory, WalletDTO walletDTO)
-			throws WalletException {
+	public WalletResponseDTO addWalletEntity(TokenDTO tokenDTO, Integer idCategory, WalletDTO walletDTO)
+			throws WalletException, AuthenticationException {
 		WalletValidation.validateWalletDTO(walletDTO);
-		String username = principal.getName();
-		User utente = (User) userDAO.findByUsername(username).orElse(null);
-		if (utente == null) {
-			LOG.error("User Not Found");
-			throw new WalletException(WalletException.Type.USER_NOT_FOUND);
-		}
+		AuthCredentialEntity utente = validateAndCreate(tokenDTO);
 		walletDTO.setUser(utente);
 		CategoryEntity category = categoryDAO.findById(idCategory).orElse(null);
 		if (category == null) {
@@ -97,5 +94,21 @@ public class WalletService {
 		}
 		walletDAO.deleteById(idWallet);
 		return new WalletResponseDTO(WalletResponse.Type.WALLET_DELETED.toString());
+	}
+
+	private AuthCredentialEntity validateAndCreate(TokenDTO tokenDTO) throws AuthenticationException, WalletException {
+		TokenValidation.validateTokenDTO(tokenDTO);
+		if (tokenDTO.getAccessToken().equalsIgnoreCase("")) {
+			throw new AuthenticationException(AuthenticationException.Type.TOKEN_REQUIRED);
+		}
+		AuthCredentialDTO authCredentialDTO = tokenService.parseToken(tokenDTO);
+		AuthCredentialInputDTO authCredentialInputDTO = new AuthCredentialInputDTO(authCredentialDTO.getUsername(),
+				authCredentialDTO.getPassword());
+		AuthCredentialEntity utente = authCredentialDAO.getCredential(authCredentialInputDTO);
+		if (utente == null) {
+			LOG.error("User Not Found");
+			throw new WalletException(WalletException.Type.USER_NOT_FOUND);
+		}
+		return utente;
 	}
 }

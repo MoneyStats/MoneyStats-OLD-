@@ -1,6 +1,5 @@
 package com.moneystats.MoneyStats.wallet;
 
-import java.security.Principal;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
@@ -21,19 +20,22 @@ import com.moneystats.MoneyStats.source.DTOTestObjets;
 import com.moneystats.MoneyStats.wallet.DTO.WalletDTO;
 import com.moneystats.MoneyStats.wallet.DTO.WalletResponse;
 import com.moneystats.MoneyStats.wallet.DTO.WalletResponseDTO;
+import com.moneystats.authentication.DTO.TokenDTO;
 
-@SpringBootTest
-@AutoConfigureMockMvc(addFilters = false)
+@SpringBootTest(properties = "spring.main.lazy-initialization=true", classes = WalletController.class)
+@AutoConfigureMockMvc
 public class WalletControllerTest {
+
+	private static final String TOKEN_JWT = "my-token-jwt";
+	private static final String WRONG_TOKEN_JWT = "my-wrong-token-jwt";
+	private static final TokenDTO USER_TOKEN_DTO = new TokenDTO(TOKEN_JWT);
 
 	@MockBean
 	private WalletService walletService;
 	@Autowired
 	private MockMvc mockMvc;
-	@Autowired
-	private ObjectMapper objectMapper;
-	@Captor
-	private ArgumentCaptor<Principal> principalCaptor;
+
+	private ObjectMapper objectMapper = new ObjectMapper();
 	@Captor
 	private ArgumentCaptor<WalletDTO> walletDTOCaptor;
 	@Captor
@@ -43,9 +45,10 @@ public class WalletControllerTest {
 	public void testGetAllWalletList_OK() throws Exception {
 		List<WalletDTO> walletDTOS = DTOTestObjets.walletDTOS;
 		String walletAsString = objectMapper.writeValueAsString(walletDTOS);
-		Mockito.when(walletService.getAll(principalCaptor.capture())).thenReturn(walletDTOS);
+		Mockito.when(walletService.getAll(USER_TOKEN_DTO)).thenReturn(walletDTOS);
 
-		mockMvc.perform(MockMvcRequestBuilders.get("/wallet/list")).andExpect(MockMvcResultMatchers.status().isOk())
+		mockMvc.perform(MockMvcRequestBuilders.get("/wallet/list").header("Authorization", "Bearer " + USER_TOKEN_DTO))
+				.andExpect(MockMvcResultMatchers.status().isOk())
 				.andExpect(MockMvcResultMatchers.content().json(walletAsString));
 	}
 
@@ -56,11 +59,13 @@ public class WalletControllerTest {
 		String walletDTOasString = objectMapper.writeValueAsString(walletDTO);
 		WalletResponseDTO response = new WalletResponseDTO(WalletResponse.Type.WALLET_ADDED.toString());
 
-		Mockito.when(walletService.addWalletEntity(principalCaptor.capture(), idCategoryCaptor.capture(),
-				walletDTOCaptor.capture())).thenReturn(response);
+		Mockito.when(
+				walletService.addWalletEntity(USER_TOKEN_DTO, idCategoryCaptor.capture(), walletDTOCaptor.capture()))
+				.thenReturn(response);
 
-		mockMvc.perform(MockMvcRequestBuilders.post("/wallet/postWallet/" + idCategory)
-				.contentType(MediaType.APPLICATION_JSON).content(walletDTOasString))
+		mockMvc.perform(
+				MockMvcRequestBuilders.post("/wallet/postWallet/" + idCategory).contentType(MediaType.APPLICATION_JSON)
+						.content(walletDTOasString).header("Authorization", "Bearer " + USER_TOKEN_DTO))
 				.andExpect(MockMvcResultMatchers.status().isOk());
 	}
 
@@ -69,9 +74,8 @@ public class WalletControllerTest {
 		WalletDTO walletDTO = DTOTestObjets.walletDTO;
 		walletDTO.setName(null);
 		Integer idCategory = 1;
-		Principal principal = null;
 
-		Mockito.when(walletService.addWalletEntity(principal, idCategory, walletDTO))
+		Mockito.when(walletService.addWalletEntity(USER_TOKEN_DTO, idCategory, walletDTO))
 				.thenThrow(new WalletException(WalletException.Type.INVALID_WALLET_DTO));
 
 		mockMvc.perform(MockMvcRequestBuilders.post("/wallet/postWallet/" + idCategory))
@@ -82,9 +86,8 @@ public class WalletControllerTest {
 	public void testAddWallet_shouldBeMappedUserNotFound() throws Exception {
 		WalletDTO walletDTO = DTOTestObjets.walletDTO;
 		Integer idCategory = 1;
-		Principal principal = null;
 
-		Mockito.when(walletService.addWalletEntity(principal, idCategory, walletDTO))
+		Mockito.when(walletService.addWalletEntity(USER_TOKEN_DTO, idCategory, walletDTO))
 				.thenThrow(new WalletException(WalletException.Type.USER_NOT_FOUND));
 
 		mockMvc.perform(MockMvcRequestBuilders.post("/wallet/postWallet"))
@@ -95,9 +98,8 @@ public class WalletControllerTest {
 	public void testAddWalletList_shouldBeMappedWalletDtoNull() throws Exception {
 		WalletDTO walletDTO = DTOTestObjets.walletDTO;
 		Integer idCategory = null;
-		Principal principal = null;
 
-		Mockito.when(walletService.addWalletEntity(principal, idCategory, walletDTO))
+		Mockito.when(walletService.addWalletEntity(USER_TOKEN_DTO, idCategory, walletDTO))
 				.thenThrow(new WalletException(WalletException.Type.CATEGORY_NOT_FOUND));
 
 		mockMvc.perform(MockMvcRequestBuilders.post("/wallet/postWallet"))

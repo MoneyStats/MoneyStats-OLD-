@@ -12,7 +12,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import com.moneystats.MoneyStats.category.entity.CategoryEntity;
 import com.moneystats.MoneyStats.source.DTOTestObjets;
 
-@SpringBootTest
+@SpringBootTest(properties = "spring.main.lazy-initialization=true", classes = CategoryService.class)
 public class CategoryServiceTest {
 
 	@Mock

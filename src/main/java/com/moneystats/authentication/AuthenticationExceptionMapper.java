@@ -33,7 +33,9 @@ public class AuthenticationExceptionMapper implements ExceptionMapper<Authentica
                 AuthenticationException.Type.INVALID_TOKEN_DTO,
                 Response.Status.UNAUTHORIZED,
                 AuthenticationException.Type.AUTH_CREDENTIAL_DTO_NOT_FOUND,
-                Response.Status.NOT_FOUND);
+                Response.Status.NOT_FOUND,
+                AuthenticationException.Type.TOKEN_REQUIRED,
+                Response.Status.BAD_REQUEST);
 
         bodies = Map.of(
                 AuthenticationException.Type.DATABASE_ERROR,
@@ -51,7 +53,9 @@ public class AuthenticationExceptionMapper implements ExceptionMapper<Authentica
                 AuthenticationException.Type.INVALID_TOKEN_DTO,
                 new AuthErrorResponseDTO("INVALID_TOKEN_DTO"),
                 AuthenticationException.Type.AUTH_CREDENTIAL_DTO_NOT_FOUND,
-                new AuthErrorResponseDTO("AUTH_CREDENTIAL_DTO_NOT_FOUND"));
+                new AuthErrorResponseDTO("AUTH_CREDENTIAL_DTO_NOT_FOUND"),
+                AuthenticationException.Type.TOKEN_REQUIRED,
+                new AuthErrorResponseDTO("TOKEN_REQUIRED"));
     }
 
     /**

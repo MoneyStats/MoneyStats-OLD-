@@ -9,10 +9,12 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
 
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 
+@Service
 public class TokenService {
 
     private final Logger LOG = LoggerFactory.getLogger(this.getClass());

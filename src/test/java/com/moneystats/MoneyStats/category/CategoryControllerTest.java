@@ -16,16 +16,16 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.moneystats.MoneyStats.category.DTO.CategoryDTO;
 import com.moneystats.MoneyStats.source.DTOTestObjets;
 
-@SpringBootTest
-@AutoConfigureMockMvc(addFilters = false)
+@AutoConfigureMockMvc
+@SpringBootTest(properties = "spring.main.lazy-initialization=true", classes = CategoryController.class)
 public class CategoryControllerTest {
 
 	@MockBean
 	private CategoryService categoryService;
 	@Autowired
 	private MockMvc mockMvc;
-	@Autowired
-	private ObjectMapper objectMapper;
+
+	private ObjectMapper objectMapper = new ObjectMapper();
 
 	@Test
 	public void testGetAllCategory_OK() throws Exception {

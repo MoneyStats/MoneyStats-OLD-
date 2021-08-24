@@ -5,13 +5,9 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.moneystats.authentication.AuthenticationException;
+import com.moneystats.authentication.DTO.TokenDTO;
+import org.springframework.web.bind.annotation.*;
 
 import com.moneystats.MoneyStats.wallet.DTO.WalletDTO;
 import com.moneystats.MoneyStats.wallet.DTO.WalletResponseDTO;
@@ -24,15 +20,16 @@ public class WalletController {
 	private WalletService walletService;
 
 	@GetMapping("/list")
-	public List<WalletDTO> getAll(Principal principal) throws WalletException {
-		return walletService.getAll(principal);
+	public List<WalletDTO> getAll(@RequestHeader(value = "Authorization") String jwt) throws WalletException, AuthenticationException {
+		TokenDTO tokenDTO = new TokenDTO(jwt);
+		return walletService.getAll(tokenDTO);
 	}
 
 	@PostMapping("/postWallet/{idCategory}")
-	public WalletResponseDTO addWallet(Principal principal, @PathVariable int idCategory,
-			@RequestBody WalletDTO walletDTO) throws WalletException {
-		Integer idCategoryService = idCategory;
-		return walletService.addWalletEntity(principal, idCategoryService, walletDTO);
+	public WalletResponseDTO addWallet(@RequestHeader(value = "Authorization") String jwt, @PathVariable int idCategory,
+			@RequestBody WalletDTO walletDTO) throws WalletException, AuthenticationException {
+		TokenDTO tokenDTO = new TokenDTO(jwt);
+		return walletService.addWalletEntity(tokenDTO, idCategory, walletDTO);
 	}
 
 	@DeleteMapping("/delete/{idWallet}")

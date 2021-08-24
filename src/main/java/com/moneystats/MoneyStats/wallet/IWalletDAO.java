@@ -10,7 +10,7 @@ import java.util.List;
 public interface IWalletDAO extends JpaRepository<WalletEntity, Integer> {
     List<WalletEntity> findWalletsByCategoryId(Integer id);
 
-    List<WalletEntity> findAllByUserId(Integer userId);
+    List<WalletEntity> findAllByUserId(Long userId);
 
     WalletEntity findWalletsById(Integer id);
 }
