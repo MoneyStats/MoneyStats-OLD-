@@ -1,4 +1,4 @@
-package com.moneystats.MoneyStats.generic;
+package com.moneystats.generic;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

@@ -1,4 +1,4 @@
-package com.moneystats.MoneyStats.databaseQuery;
+package com.moneystats.databaseQuery;
 
 import org.hibernate.dialect.MySQL5Dialect;
 import org.hibernate.dialect.function.StandardSQLFunction;
