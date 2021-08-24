@@ -58,11 +58,6 @@ public class WalletServiceTest {
 			public String getName() {
 				return name;
 			}
-
-			@SuppressWarnings("unused")
-			public void setName(String name) {
-				this.name = name;
-			}
 		};
 		return principal;
 	}
